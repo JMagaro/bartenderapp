@@ -13,8 +13,7 @@ namespace BartenderApp.Controllers
     public class DrinksController : Controller
 
     {
-        private DrinkDbContext db = new DrinkDbContext();
-        private OrderDbContext dbOrder = new OrderDbContext();
+        private BartenderDbContext db = new BartenderDbContext();
 
         // GET: Drinks
         public ActionResult Index()

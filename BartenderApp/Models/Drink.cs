@@ -10,9 +10,6 @@ namespace BartenderApp.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-    }
-    public class DrinkDbContext : DbContext
-    {
-        public DbSet <Drink> Drinks { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }
