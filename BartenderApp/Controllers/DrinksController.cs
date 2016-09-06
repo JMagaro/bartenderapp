@@ -11,9 +11,9 @@ using BartenderApp.Models;
 namespace BartenderApp.Controllers
 {
     public class DrinksController : Controller
-
     {
         private BartenderDbContext db = new BartenderDbContext();
+
 
         // GET: Drinks
         public ActionResult Index()
@@ -26,14 +26,34 @@ namespace BartenderApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Order([Bind(Include = "Id,Name")] Drink drink)
         {
+            var dbDrink = db.Drinks.Find(drink.Id);
 
-            return View();
+            if (ModelState.IsValid)
+            {
+                var order = new Order();
+                order.Drink = dbDrink;
+                db.Orders.Add(order);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+
+            }
+
+            return View(dbDrink);
+
+
+
         }
 
-        public ActionResult Order()
+        public ActionResult Order(int id)
         {
-            return View();
+            var drink = db.Drinks.Find(id);
+
+            return View(drink);
+
+
         }
+
+
 
 
         // GET: Drinks/Details/5
@@ -140,5 +160,4 @@ namespace BartenderApp.Controllers
             base.Dispose(disposing);
         }
     }
-
 }

@@ -9,6 +9,6 @@ namespace BartenderApp.Models
     public class BartenderDbContext : DbContext
     {
         public DbSet<Drink> Drinks { get; set; }
-        public DbSet<Order> Order { get; set; }
+        public DbSet<Order> Orders { get; set; }
     }
 }
